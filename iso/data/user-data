@@ -30,6 +30,8 @@ write_files:
       --volume /var/run/docker.sock:/var/run/docker.sock \
       --workdir /tmp/$(basename ${PWD}) \
       docker/compose:1.11.2'
+bootcmd:
+  - [ sed, -i, -e, 's~^enabled=1~enabled=0~', /etc/yum/pluginconf.d/fastestmirror.conf ]
 packages:
   - chrony
   - docker-latest
