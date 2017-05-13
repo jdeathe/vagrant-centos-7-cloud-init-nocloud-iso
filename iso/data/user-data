@@ -29,7 +29,7 @@ write_files:
       --volume ${PWD}:/tmp/$(basename ${PWD}) \
       --volume /var/run/docker.sock:/var/run/docker.sock \
       --workdir /tmp/$(basename ${PWD}) \
-      docker/compose:1.11.2'
+      docker/compose:1.13.0'
 bootcmd:
   - [ sed, -i, -e, 's~^enabled=1~enabled=0~', /etc/yum/pluginconf.d/fastestmirror.conf ]
 packages:
