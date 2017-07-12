@@ -39,7 +39,7 @@ packages:
   - yum-plugin-ovl
 runcmd:
   - [ sed, -i, '/DOCKERBINARY=\/usr\/bin\/docker-latest/s~^#~~g', /etc/sysconfig/docker ]
-  - [ sed, -i, "s~OPTIONS='--selinux-enabled --log-driver=journald'~OPTIONS='--selinux-enabled=false --log-driver=journald -H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375'~", /etc/sysconfig/docker ]
+  - [ sed, -i, "s~OPTIONS='--selinux-enabled\\(.*\\)'~OPTIONS='--selinux-enabled=false\\1 -H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375'~", /etc/sysconfig/docker, /etc/sysconfig/docker-latest ]
   - [ sed, -i, '/STORAGE_DRIVER=.*$/ { $!N; d; }', /etc/sysconfig/docker-latest-storage-setup ]
   - [ /bin/bash, -c, "echo 'STORAGE_DRIVER=overlay' >> /etc/sysconfig/docker-latest-storage-setup" ]
   - [ systemctl, enable, --force, --now, --no-block, docker-latest.service ]
