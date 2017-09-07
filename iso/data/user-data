@@ -38,6 +38,7 @@ packages:
   - etcd
   - yum-plugin-ovl
 runcmd:
+  - [ sed, -r, -i, -e, 's~^(makestep )[0-9]+ [0-9]+$~\11 -1~', /etc/chrony.conf ]
   - [ sed, -i, '/DOCKERBINARY=\/usr\/bin\/docker-latest/s~^#~~g', /etc/sysconfig/docker ]
   - [ sed, -i, "s~OPTIONS='--selinux-enabled\\(.*\\)'~OPTIONS='--selinux-enabled=false\\1 -H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375'~", /etc/sysconfig/docker, /etc/sysconfig/docker-latest ]
   - [ sed, -i, '/STORAGE_DRIVER=.*$/ { $!N; d; }', /etc/sysconfig/docker-latest-storage-setup ]
