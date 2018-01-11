@@ -8,14 +8,14 @@ Cloud-Init is used to install `docker-latest` onto the [jdeathe/centos-7-x86_64-
 
 ### Prerequisites (with versions tested)
 
-Host operating system: OSX El Capitan
+Host operating system: OSX (macOS High Sierra)
 
-- [VirtualBox](https://www.virtualbox.org) (5.1.20)
-- [Vagrant](https://www.vagrantup.com) (1.9.3)
+- [VirtualBox](https://www.virtualbox.org) (5.2.4)
+- [Vagrant](https://www.vagrantup.com) (2.0.1)
 
 ### Populate user-data
 
-Change the contents of `iso/data/user-data` as necessary, using the [Cloud-Init Documentation](https://cloudinit.readthedocs.io/en/latest/topics/examples.html) for reference.
+Change the contents of `cidata/user-data` as necessary, using the [Cloud-Init Documentation](https://cloudinit.readthedocs.io/en/latest/topics/examples.html) for reference.
 
 ### Start a VirtualBox VM
 

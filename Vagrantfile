@@ -6,12 +6,16 @@ require 'fileutils'
 
 Vagrant.require_version ">= 1.9.2"
 
-$cloud_config_user_path = File.expand_path(
-  "./iso/data/user-data",
+$config_path = File.expand_path(
+  "./config.rb",
   File.dirname(__FILE__)
 )
 $cloud_config_meta_path = File.expand_path(
-  "./iso/data/meta-data",
+  "./cidata/meta-data",
+  File.dirname(__FILE__)
+)
+$cloud_config_user_path = File.expand_path(
+  "./cidata/user-data",
   File.dirname(__FILE__)
 )
 
@@ -25,10 +29,13 @@ $linked_clone = true
 $vm_name = "cloud-init-iso"
 
 if %w(up reload).include? ARGV[0]
-  File.open("#{$cloud_config_meta_path}", "w") do |meta|
+  File.open(
+    "#{$cloud_config_meta_path}",
+    "w"
+  ) do |meta|
     meta.write "# Auto-Generated - DO NOT CHANGE THIS\n"
     meta.write "hostname: #{$vm_name}\n"
-    meta.write "instance-id: #{"iid-%s" % $cloudinit_uid}"
+    meta.write "instance-id: iid-#{$cloudinit_uid}"
   end
 
   # Generate the NoCloud ISO
@@ -42,14 +49,14 @@ if %w(up reload).include? ARGV[0]
         -joliet \
         -default-volume-name cidata \
         -o iso/nocloud.iso \
-        iso/data/
+        cidata/
     elif command -v mkisofs &> /dev/null; then
       mkisofs \
         -R \
         -J \
         -V cidata \
         -o iso/nocloud.iso \
-        iso/data/*
+        cidata/*
     fi
   ")
 end
@@ -58,6 +65,12 @@ $cloud_config_iso = File.expand_path(
   "./iso/nocloud.iso",
   File.dirname(__FILE__)
 )
+
+if !File.exist?($cloud_config_iso)
+  puts "ERROR: Missing NoCloud ISO file: 
+%s" % $cloud_config_iso
+  abort
+end
 
 Vagrant.configure("2") do |config|
   config.vm.box = "jdeathe/centos-7-x86_64-minimal-cloud-init-en_us"
@@ -89,7 +102,10 @@ defined in user-data. Check progress with:
 end
 
 if %w(up reload).include? ARGV[0]
-  File.open("#{$cloud_config_meta_path}", "w") do |meta|
+  File.open(
+    "#{$cloud_config_meta_path}",
+    "w"
+  ) do |meta|
     meta.write "# Auto-Generated - DO NOT CHANGE THIS"
   end
 end
