@@ -10,8 +10,8 @@ Cloud-Init is used to install `docker-latest` onto the [jdeathe/centos-7-x86_64-
 
 Host operating system: OSX (macOS High Sierra)
 
-- [VirtualBox](https://www.virtualbox.org) (5.2.4)
-- [Vagrant](https://www.vagrantup.com) (2.0.1)
+- [VirtualBox](https://www.virtualbox.org) (5.2.18)
+- [Vagrant](https://www.vagrantup.com) (2.1.5)
 
 ### Populate user-data
 
