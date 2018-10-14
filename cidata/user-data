@@ -2,15 +2,6 @@
 
 ---
 timezone: "UTC"
-# users:
-#   - name: "docker"
-#     lock_passwd: true
-#     gecos: "Cloud User"
-#     groups: [ wheel, systemd-journal ]
-#     sudo: "ALL=(ALL) NOPASSWD:ALL"
-#     ssh-authorized-keys:
-#       - "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
-#     shell: "/bin/bash"
 write_files:
   - path: "/etc/profile.d/docker-alias.sh"
     permissions: "0644"
@@ -21,24 +12,18 @@ write_files:
     permissions: "0644"
     owner: "root"
     content: |
-      alias docker-compose='touch ${PWD}/.env; \
-      sudo /usr/bin/docker-latest run \
-      --privileged \
-      --rm \
-      --env-file ${PWD}/.env \
-      --volume ${PWD}:/tmp/$(basename ${PWD}) \
-      --volume /var/run/docker.sock:/var/run/docker.sock \
-      --workdir /tmp/$(basename ${PWD}) \
-      docker/compose:1.13.0'
+      alias docker-compose="sudo /usr/bin/docker-compose"
 bootcmd:
   - [ sed, -i, -e, 's~^enabled=1~enabled=0~', /etc/yum/pluginconf.d/fastestmirror.conf ]
+  - [ /bin/bash, -c, "rpm -q --quiet epel-release || yum -y install epel-release" ]
 packages:
   - chrony
+  - docker-compose
   - docker-latest
   - etcd
   - yum-plugin-ovl
 runcmd:
-  - [ sed, -r, -i, -e, 's~^(makestep )[0-9]+ [0-9]+$~\11 -1~', /etc/chrony.conf ]
+  - [ sed, -r, -i, -e, 's~^(makestep )[0-9\.]+ (-)?[0-9]+$~\11 -1~', /etc/chrony.conf ]
   - [ sed, -i, '/DOCKERBINARY=\/usr\/bin\/docker-latest/s~^#~~g', /etc/sysconfig/docker ]
   - [ sed, -i, "s~OPTIONS='--selinux-enabled\\(.*\\)'~OPTIONS='--selinux-enabled=false\\1 -H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375'~", /etc/sysconfig/docker, /etc/sysconfig/docker-latest ]
   - [ sed, -i, '/STORAGE_DRIVER=.*$/ { $!N; d; }', /etc/sysconfig/docker-latest-storage-setup ]
