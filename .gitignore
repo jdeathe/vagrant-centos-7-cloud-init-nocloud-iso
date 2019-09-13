@@ -1,2 +1,2 @@
-.vagrant/
-iso/*.iso
+/.vagrant/
+/iso/*.iso
