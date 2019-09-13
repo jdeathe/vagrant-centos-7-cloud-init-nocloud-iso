@@ -1,0 +1,27 @@
+#cloud-config
+
+---
+timezone: "UTC"
+bootcmd:
+  - [ sed, -i, -e, 's~^enabled=1~enabled=0~', /etc/yum/pluginconf.d/fastestmirror.conf ]
+  - [ /bin/bash, -c, "rpm -q --quiet epel-release || yum -y install epel-release" ]
+packages:
+  - chrony
+  - docker-compose
+  - docker-latest
+  - etcd
+  - iptables-service
+  - yum-plugin-ovl
+runcmd:
+  - [ sed, -r, -i, -e, 's~^(makestep )[0-9\.]+ (-)?[0-9]+$~\11 -1~', /etc/chrony.conf ]
+  - [ systemctl, disable, --force, --now, firewalld.service ]
+  - [ systemctl, mask, --no-block, firewalld.service ]
+  - [ sed, -i, '/DOCKERBINARY=\/usr\/bin\/docker-latest/s~^#~~g', /etc/sysconfig/docker ]
+  - [ sed, -i, "s~OPTIONS='--selinux-enabled\\(.*\\)'~OPTIONS='--selinux-enabled=false\\1'~", /etc/sysconfig/docker, /etc/sysconfig/docker-latest ]
+  - [ sed, -i, '/STORAGE_DRIVER=.*$/ { $!N; d; }', /etc/sysconfig/docker-latest-storage-setup ]
+  - [ /bin/bash, -c, "echo 'STORAGE_DRIVER=overlay' >> /etc/sysconfig/docker-latest-storage-setup" ]
+  - [ systemctl, enable, --force, --now, --no-block, docker-latest.service ]
+  - [ systemctl, mask, --no-block, docker.service ]
+  - [ systemctl, enable, --force, --now, --no-block, etcd.service ]
+  - [ timedatectl, set-ntp, false ]
+  - [ timedatectl, set-ntp, true ]
