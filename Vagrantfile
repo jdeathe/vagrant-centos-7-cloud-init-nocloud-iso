@@ -74,9 +74,9 @@ end
 
 Vagrant.configure("2") do |config|
   config.vm.box = "jdeathe/centos-7-x86_64-minimal-cloud-init-en_us"
-  config.vm.post_up_message = "After the machine is booted Cloud-Init will apply the changes 
-defined in user-data. Check progress with:
-  vagrant ssh -- tail -f /var/log/cloud-init-output.log"
+  config.vm.post_up_message = "After the machine is booted Cloud-Init applied the changes 
+defined in user-data. Check that docker (docker-latest) was installed:
+  vagrant ssh -- sudo docker info"
 
   config.vm.define $vm_name do |config|
     config.vm.hostname = $vm_name
@@ -98,6 +98,15 @@ defined in user-data. Check progress with:
         ]
       end
     end
+
+    config.vm.provision "shell", keep_color: true,
+      name: "Wait for Cloud-init boot-finished",
+      inline: "tail -f /var/log/cloud-init-output.log & \
+        CIO_PID=${!}; \
+        until [[ -e /var/lib/cloud/instance/boot-finished ]]; do \
+          sleep 1; \
+        done; \
+        kill ${CIO_PID}"
   end
 end
 

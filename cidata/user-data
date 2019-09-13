@@ -2,17 +2,6 @@
 
 ---
 timezone: "UTC"
-write_files:
-  - path: "/etc/profile.d/docker-alias.sh"
-    permissions: "0644"
-    owner: "root"
-    content: |
-      alias docker="sudo /usr/bin/docker-latest"
-  - path: "/etc/profile.d/docker-compose-alias.sh"
-    permissions: "0644"
-    owner: "root"
-    content: |
-      alias docker-compose="sudo /usr/bin/docker-compose"
 bootcmd:
   - [ sed, -i, -e, 's~^enabled=1~enabled=0~', /etc/yum/pluginconf.d/fastestmirror.conf ]
   - [ /bin/bash, -c, "rpm -q --quiet epel-release || yum -y install epel-release" ]
