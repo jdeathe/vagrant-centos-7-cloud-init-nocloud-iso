@@ -4,7 +4,7 @@
 timezone: "UTC"
 write_files:
   - path: "/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7"
-    permissions: "0600"
+    permissions: "0644"
     owner: "root:root"
     encoding: "gz+b64"
     # curl -sLo - https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7 | gzip -9 | base64
