@@ -6,36 +6,8 @@ write_files:
   - path: "/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7"
     permissions: "0600"
     owner: "root:root"
-    content: |
-      -----BEGIN PGP PUBLIC KEY BLOCK-----
-      Version: GnuPG v1.4.11 (GNU/Linux)
-
-      mQINBFKuaIQBEAC1UphXwMqCAarPUH/ZsOFslabeTVO2pDk5YnO96f+rgZB7xArB
-      OSeQk7B90iqSJ85/c72OAn4OXYvT63gfCeXpJs5M7emXkPsNQWWSju99lW+AqSNm
-      jYWhmRlLRGl0OO7gIwj776dIXvcMNFlzSPj00N2xAqjMbjlnV2n2abAE5gq6VpqP
-      vFXVyfrVa/ualogDVmf6h2t4Rdpifq8qTHsHFU3xpCz+T6/dGWKGQ42ZQfTaLnDM
-      jToAsmY0AyevkIbX6iZVtzGvanYpPcWW4X0RDPcpqfFNZk643xI4lsZ+Y2Er9Yu5
-      S/8x0ly+tmmIokaE0wwbdUu740YTZjCesroYWiRg5zuQ2xfKxJoV5E+Eh+tYwGDJ
-      n6HfWhRgnudRRwvuJ45ztYVtKulKw8QQpd2STWrcQQDJaRWmnMooX/PATTjCBExB
-      9dkz38Druvk7IkHMtsIqlkAOQMdsX1d3Tov6BE2XDjIG0zFxLduJGbVwc/6rIc95
-      T055j36Ez0HrjxdpTGOOHxRqMK5m9flFbaxxtDnS7w77WqzW7HjFrD0VeTx2vnjj
-      GqchHEQpfDpFOzb8LTFhgYidyRNUflQY35WLOzLNV+pV3eQ3Jg11UFwelSNLqfQf
-      uFRGc+zcwkNjHh5yPvm9odR1BIfqJ6sKGPGbtPNXo7ERMRypWyRz0zi0twARAQAB
-      tChGZWRvcmEgRVBFTCAoNykgPGVwZWxAZmVkb3JhcHJvamVjdC5vcmc+iQI4BBMB
-      AgAiBQJSrmiEAhsPBgsJCAcDAgYVCAIJCgsEFgIDAQIeAQIXgAAKCRBqL66iNSxk
-      5cfGD/4spqpsTjtDM7qpytKLHKruZtvuWiqt5RfvT9ww9GUUFMZ4ZZGX4nUXg49q
-      ixDLayWR8ddG/s5kyOi3C0uX/6inzaYyRg+Bh70brqKUK14F1BrrPi29eaKfG+Gu
-      MFtXdBG2a7OtPmw3yuKmq9Epv6B0mP6E5KSdvSRSqJWtGcA6wRS/wDzXJENHp5re
-      9Ism3CYydpy0GLRA5wo4fPB5uLdUhLEUDvh2KK//fMjja3o0L+SNz8N0aDZyn5Ax
-      CU9RB3EHcTecFgoy5umRj99BZrebR1NO+4gBrivIfdvD4fJNfNBHXwhSH9ACGCNv
-      HnXVjHQF9iHWApKkRIeh8Fr2n5dtfJEF7SEX8GbX7FbsWo29kXMrVgNqHNyDnfAB
-      VoPubgQdtJZJkVZAkaHrMu8AytwT62Q4eNqmJI1aWbZQNI5jWYqc6RKuCK6/F99q
-      thFT9gJO17+yRuL6Uv2/vgzVR1RGdwVLKwlUjGPAjYflpCQwWMAASxiv9uPyYPHc
-      ErSrbRG0wjIfAR3vus1OSOx3xZHZpXFfmQTsDP7zVROLzV98R3JwFAxJ4/xqeON4
-      vCPFU6OsT3lWQ8w7il5ohY95wmujfr6lk89kEzJdOTzcn7DBbUru33CQMGKZ3Evt
-      RjsC7FDbL017qxS+ZVA/HGkyfiu4cpgV8VUnbql5eAZ+1Ll6Dw==
-      =hdPa
-      -----END PGP PUBLIC KEY BLOCK-----
+    encoding: "gz+b64"
+    content: "H4sICHtLh10CA2VwZWwtNy50eHQAdVW3rvPqAdv1FGdMYNxrWdUK8A+feu99U7eq1dvT35PsIcCJBBcS4F9//YLmBEn/MQXzx/RoVWJ+FC76oVWDUf6r/gX5xbzU3+E/P8KwmcLP/vob+/v1+vmXoHtPtR62898Q1FuSTvPKlkgWzQHm5Y2f8NAmBiSz6YnPeDH4pUvSwvUNZGRbPBoMiigfcxXT5AlmGjKcwmpJmoLryZHf+DMjEQMMmBFGu0ugVckU4SgvuEYWfdiai24FgdNsFNUFDzA5eg81UfDp7U61hQ42DLKSjoYkiVwK90zT+e52zAaGdeQEU6OlTTf4yIAkKeDwaiL8cTKhnQ/9q5z95Lkl3bdi/b4kPsiK2flYl9N7csVF5D30HJn74RLPXAgUwcKQ2CrdRB1YDWrcL1j6CAZXsbdSGhJ17K+3sCdDNJpZEGAhbLNmNk4lr8ctgaGnhHVL/IgQbqaiDYec5/uEu+ux9r30bRMOPo409zYSgyM3bphimb9RUNsVfm8WcpbKKX99nHtwn8caHQIrQwMhlsHHroYtt+1j32QMv9fIX5WtU463ZY054rjBnFkWKyd20A/a9xs+TeC6DUNzJw1ReXujb3be9paUWlFbF2nqWmBYWr6Erxx1vztBc0jINpIA3/yp5psspP6RPYlZyigccmEcb1CCu2Fxbs58dAXDEE970hS8p8qOT5PzXNnBIQ+SDKY7IMWGn1nYL9wT2YemgYQp+4icNZbsyBt3+lZd/lNFdX7Zuld2VoTigWrcqu4/Rh8tLFSuXi+PP4rO0dWptEpo420he9zZ0eqN+MEvc++pb26/aKmcZGJRBFNIV1MPvyRna/Y1Bpd9w3cNrwewgQVoaGU+QhzYe9Zzle3TvMuAr361lSn4RxycIO79NkXlTybKe9L7Tc7gv97sUVsSRtMaDYEK1LQlO3Nfc+CzmHS1yAzIWFBFPgMkmakWjq8kFlhS8cuwAkBhbHpSCaLWnbOF8KwU2Ce2jNO4uM3KauQ0Xquiisq8xeu+BfW04na5u9RxUILn8VqMxbEQYoMXVhg1QfXJqskV2O88F54L3l5GjTLwFj6JeriT6LKrB/0h4XSeFE95YfyLnmezRqgiUUrhIWyQxq9hTgtIQhqr2R/otSn9RHHjb/twbxIcrjj57tjOJAerkAHisJ3nwd6hzOniiM8FRElLjzLRlY8XLKg2wI8vVpo0vqm591E5j90/iKI8n6XWNAn6hdWHo99vHU7Y+BpwcEKMR9k0yomZW2R89b3wrbcbiqLjuUjtl248sIqe610q853FSlkvdVoMj48jUoARGH2HxCH0G9HiqVoMwKi0tlR83vyMDHi+ljLHkw4XvoU0JPl0Cb4I1Yba7Ff6JOoXO5S/O/C/5pZWVr7Ksdz6MWgTcda2N7jWwyUQCyv0qZelVxKksaVLeBNEU0bYysYoxJOnfltYP7xLVbLxIh+XvamEtyPPvbp9+2UL+eGrytF5jWCCJiq7kbGOQAPAOeud2swrMsUM4mZnTm0BPhqpBDa6b8vLcIwTPWMxHkO+7C13YU3yN9FQb59626h88OCUsec5FYaOQTtj8h5hLC7aBdb7IOsO/34iCj/6rSlnomvfVMvdcm64dzaQLJ1684aijKUJSoxy+wrZzcKQPJuq8IucTucR++ApCu1V1huWjZX/9r0hnTq8APHjpXYEe/z5A/355GYC/e87OJ39/8fyDyB7Elx9BgAA"
   - path: "/etc/yum/pluginconf.d/fastestmirror.conf"
     permissions: "0644"
     owner: "root:root"
@@ -45,13 +17,9 @@ write_files:
       verbose=0
       always_print_best_host = true
       socket_timeout=3
-      #  Relative paths are relative to the cachedir (and so works for users as well
-      # as root).
       hostfilepath=timedhosts.txt
       maxhostfileage=10
       maxthreads=15
-      #exclude=.gov, facebook
-      #include_only=.nl,.de,.uk,.ie
 yum_repos:
   epel:
     name: "Extra Packages for Enterprise Linux 7 - $basearch"
