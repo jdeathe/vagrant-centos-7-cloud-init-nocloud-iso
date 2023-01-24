@@ -81,15 +81,26 @@ defined in user-data. Check that docker (docker-latest) was installed:
   config.vm.define $vm_name do |config|
     config.vm.hostname = $vm_name
 
-    config.vm.provider "virtualbox" do |vb|
+    config.vm.provider "libvirt" do |domain|
 
-      vb.check_guest_additions = false
-      vb.functional_vboxsf = false
-      vb.linked_clone = $linked_clone
-      vb.name = $vm_name
+      domain.title = $vm_name
 
       if File.exist?($cloud_config_iso)
-        vb.customize [
+        domain.storage :file,
+          :device => :cdrom,
+          :path => "#{$cloud_config_iso}"
+      end
+    end
+
+    config.vm.provider "virtualbox" do |domain|
+
+      domain.check_guest_additions = false
+      domain.functional_domainoxsf = false
+      domain.linked_clone = $linked_clone
+      domain.name = $vm_name
+
+      if File.exist?($cloud_config_iso)
+        domain.customize [
           "storageattach", :id,
           "--storagectl", "SATA Controller",
           "--port", "1",
